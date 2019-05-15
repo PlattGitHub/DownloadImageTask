@@ -57,9 +57,8 @@ class DownloadImageFragment : Fragment(), CoroutineScope {
         job = Job()
         context?.let {
             downloadManager = context?.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
-            if (attachmentUriFile != Uri.EMPTY) {
-                postImage(attachmentUriFile, it)
-            }
+            postImage(attachmentUriFile, it)
+
         }
         button.setOnClickListener {
             startDownload(imageLink)
