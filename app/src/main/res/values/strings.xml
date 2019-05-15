@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">DownloadImageTask</string>
+    <string name="no_permission">You didn\'t grant permission</string>
+    <string name="download_image">Download Image</string>
+    <string name="download_cancelled">Download has cancelled</string>
+    <string name="downloading_image">Downloading image</string>
+    <string name="image_file_name">%1$s.%2$s</string>
+</resources>
