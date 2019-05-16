@@ -7,6 +7,13 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
 
+/**
+ * Launcher Activity that is container for [DownloadImageFragment].
+ * Before showing [DownloadImageFragment] it requests [Manifest.permission.WRITE_EXTERNAL_STORAGE]
+ * permission.
+ *
+ * @author Alexander Gorin
+ */
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,7 +56,7 @@ class MainActivity : AppCompatActivity() {
             .add(R.id.fragment_container, DownloadImageFragment.newInstance()).commit()
     }
 
-    companion object {
+    private companion object {
         const val REQUEST_PERMISSION_WRITE_EXTERNAL_STORAGE = 1
     }
 }

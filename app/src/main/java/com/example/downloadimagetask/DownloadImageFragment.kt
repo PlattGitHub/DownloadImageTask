@@ -33,9 +33,12 @@ class DownloadImageFragment : Fragment(), CoroutineScope {
     private lateinit var button: Button
     private lateinit var imageView: ImageView
     private lateinit var layout: ConstraintLayout
+
     private lateinit var downloadManager: DownloadManager
+
     private var lastDownloadID = -1L
     private var attachmentUriFile: Uri = Uri.EMPTY
+
     private lateinit var job: Job
     override val coroutineContext: CoroutineContext
         get() = job + Dispatchers.Main
@@ -56,9 +59,8 @@ class DownloadImageFragment : Fragment(), CoroutineScope {
         }
         job = Job()
         context?.let {
-            downloadManager = context?.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
+            downloadManager = it.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
             postImage(attachmentUriFile, it)
-
         }
         button.setOnClickListener {
             startDownload(imageLink)
@@ -134,10 +136,10 @@ class DownloadImageFragment : Fragment(), CoroutineScope {
             context?.let {
                 launch {
                     val uriResult = withContext(Dispatchers.IO) {
-                        getFileUri(context, downloadManager, lastDownloadID)
+                        getFileUri(it, downloadManager, lastDownloadID)
                     }
                     attachmentUriFile = uriResult
-                    postImage(attachmentUriFile, context)
+                    postImage(attachmentUriFile, it)
                 }
             }
         }
