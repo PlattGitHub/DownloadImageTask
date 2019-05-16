@@ -16,7 +16,6 @@ import android.widget.Button
 import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
-import com.bumptech.glide.Glide
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
@@ -58,13 +57,15 @@ class DownloadImageFragment : Fragment(), CoroutineScope {
             layout = findViewById(R.id.layout)
         }
         job = Job()
-        context?.let {
-            downloadManager = it.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
-            postImage(attachmentUriFile, it)
-        }
+
+        downloadManager = context?.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
+
+        postImage(attachmentUriFile)
+
         button.setOnClickListener {
             startDownload(imageLink)
         }
+
         return view
     }
 
@@ -109,13 +110,12 @@ class DownloadImageFragment : Fragment(), CoroutineScope {
     /**
      * Method that displays image in [ImageView].
      * As [imageLink] is really big, it will take some time to load it.
-     * Gray placeholder will be shown when image is loading.
      *
      * @author Alexander Gorin
      */
-    private fun postImage(uri: Uri, context: Context) {
+    private fun postImage(uri: Uri) {
         if (uri != Uri.EMPTY) {
-            Glide.with(context).load(uri).into(imageView)
+            imageView.setImageURI(uri)
         }
     }
 
@@ -139,7 +139,7 @@ class DownloadImageFragment : Fragment(), CoroutineScope {
                         getFileUri(it, downloadManager, lastDownloadID)
                     }
                     attachmentUriFile = uriResult
-                    postImage(attachmentUriFile, it)
+                    postImage(attachmentUriFile)
                 }
             }
         }
