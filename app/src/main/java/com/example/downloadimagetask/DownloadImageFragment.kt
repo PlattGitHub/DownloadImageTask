@@ -1,6 +1,5 @@
 package com.example.downloadimagetask
 
-
 import android.app.DownloadManager
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -14,11 +13,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
-
 
 /**
  * Simple [Fragment] subclass that has [Button] to download an image
@@ -31,7 +28,6 @@ class DownloadImageFragment : Fragment(), CoroutineScope {
 
     private lateinit var button: Button
     private lateinit var imageView: ImageView
-    private lateinit var layout: ConstraintLayout
 
     private lateinit var downloadManager: DownloadManager
 
@@ -54,7 +50,6 @@ class DownloadImageFragment : Fragment(), CoroutineScope {
         val view = inflater.inflate(R.layout.fragment_download_image, container, false).apply {
             button = findViewById(R.id.button)
             imageView = findViewById(R.id.image_view)
-            layout = findViewById(R.id.layout)
         }
         job = Job()
 
@@ -109,7 +104,7 @@ class DownloadImageFragment : Fragment(), CoroutineScope {
 
     /**
      * Method that displays image in [ImageView].
-     * As [imageLink] is really big, it will take some time to load it.
+     * As image is really big, it will take some time to load it.
      *
      * @author Alexander Gorin
      */
